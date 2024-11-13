@@ -1,0 +1,66 @@
+<section class="register">
+    <h1>Registro</h1>
+
+    <form>
+      <mat-form-field appearance="outline" [color]="passwordValidator.color">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ej. correo@ejemplo.com">
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+          <mat-error>Introduce un email válido</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+          <mat-error>Se <strong>requiere</strong> un email</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+        <input
+          matInput
+          #password
+          [type]="toggle.type"
+          required
+          [formControl]="passwordValidator.passwordFormControl"
+          placeholder="Contraseña"
+        />
+        <mat-hint align="end" aria-live="polite">
+          {{password.value.length}} / 25
+        </mat-hint>
+        <mat-error
+          *ngIf="passwordValidator.passwordFormControl.hasError('required')"
+        >
+          Se <strong>requiere</strong> una contraseña
+        </mat-error>
+        <mat-error
+          *ngIf="passwordValidator.passwordFormControl.hasError('pattern')"
+        >
+          Contraseña no válida
+        </mat-error>
+      </mat-form-field>
+      <mat-password-strength style="width: 100%"
+        #passwordValidator
+        (onStrengthChanged)="onStrengthChanged($event)"
+        [password]="password.value"
+      >
+      </mat-password-strength>
+      <!--Password's strength info-->
+      <mat-password-strength-info
+        [passwordComponent]="passwordValidator"
+        lowerCaseCriteriaMsg="contiene al menos una minúscula"
+        upperCaseCriteriaMsg="contiene al menos una mayúscula"
+        digitsCriteriaMsg="contiene al menos un dígito"
+        specialCharsCriteriaMsg="contiene al menos un carácter especial"
+        minCharsCriteriaMsg="debe tener al menos 8 caracteres"
+      >
+      </mat-password-strength-info>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" placeholder="Confirm Password">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary">Register</button>
+    </form>
+</section>

@@ -1,0 +1,22 @@
+<header class="header">
+  <div class="header__title">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <nav class="header__nav">
+    <ul class="header__nav-list">
+      <li class="header__nav-list-item" *ngFor="let link of navigationLinks">
+        <a [routerLink]="link.url">{{ link.name }}</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="header__user">
+    <button class="header__user__register-btn">Register</button>
+    <button class="header__user__login-btn">Login</button>
+  </div>
+</header>
+
+<section class="content">
+  <router-outlet></router-outlet>
+</section>

@@ -1,0 +1,54 @@
+@use 'const/variables.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@font-face {
+    font-family: 'proximanova';
+    src: url('./fonts/proximanova.woff2') format('woff2'),
+        url('./fonts/proximanova.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'futura';
+    src: url('./fonts/futura.woff2') format('woff2'),
+        url('./fonts/futura.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'offline-roboto';
+    src: url('./fonts/roboto-regular-webfont.woff2') format('woff2'),
+         url('./fonts/roboto-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'archivo-offline_italic';
+    src: url('./fonts/archivo-italic-variablefont_wdthwght-webfont.woff2') format('woff2'),
+         url('./fonts/archivo-italic-variablefont_wdthwght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'archivo-offline';
+    src: url('./fonts/archivo-variablefont_wdthwght-webfont.woff2') format('woff2'),
+         url('./fonts/archivo-variablefont_wdthwght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $proximanova;
+    background-color: #f6f6f4;
+}

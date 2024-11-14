@@ -1,6 +1,7 @@
 @use 'const/variables.scss' as *;
 
 .header {
+  flex: 0 1 auto;
 	font-size: 0.85rem;
 	padding: 0 2.25rem;
 	padding-top: 0.55rem;
@@ -11,6 +12,8 @@
 	grid-template-rows: 1fr;
 	grid-template-areas: 'title nav user';
   background-color: white;
+  position: relative;
+  z-index: 100;
 
 	&__nav {
 		grid-area: nav;
@@ -110,5 +113,12 @@
 }
 
 .content {
-    padding: 2.25rem 2.25rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer {
+  flex: 0 1 auto;
 }

@@ -1,1 +1,35 @@
-<p>login works!</p>
+<section class="login_container">
+  <section class="login__image">
+    <img src="/assets/cyclism.png" alt="Register">
+  </section>
+
+  <section class="login">
+      <h1>Inicio de sesión</h1>
+
+      <form (submit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="email" name="email" matInput [formControl]="emailFormControl"
+                placeholder="Ej. correo@ejemplo.com">
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Se <strong>requiere</strong> un email</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+          <input
+            matInput
+            #password name="password"
+            [type]="toggle.type"
+            required
+            [formControl]="passwordFormControl"
+            placeholder="Contraseña"
+          />
+        </mat-form-field>
+
+          <button mat-raised-button color="primary">Iniciar sesión</button>
+      </form>
+  </section>
+</section>

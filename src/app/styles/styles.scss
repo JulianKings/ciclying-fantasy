@@ -50,11 +50,16 @@
 
 html, body { height: 100%; }
 
-body {
+body, app-root {
+    width: 100%;
     font-family: $proximanova;
     background-color: #f6f6f4;
+    min-height: 100% !important;
 }
 
-mat-password-strength .mat-progress-bar-fill::after {
-  background-color: #4caf50;
+app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
 }

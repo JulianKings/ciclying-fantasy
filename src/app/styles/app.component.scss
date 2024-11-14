@@ -10,6 +10,7 @@
 	grid-template-columns: 6rem 1fr auto;
 	grid-template-rows: 1fr;
 	grid-template-areas: 'title nav user';
+  background-color: white;
 
 	&__nav {
 		grid-area: nav;

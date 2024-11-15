@@ -1,1 +1,44 @@
-<p>login works!</p>
+<section class="login_container">
+  <section class="login__image">
+    <img src="/assets/cyclism.png" alt="Login">
+  </section>
+
+  <section class="login">
+      <h1>Inicio de sesión</h1>
+
+      <form (submit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="email" name="email" matInput [formControl]="emailFormControl"
+                placeholder="Ej. correo@ejemplo.com">
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Se <strong>requiere</strong> un email</mat-error>
+          }
+          @if (!emailFormControl.hasError('required') && emailFormControl.hasError('emailNotFound')) {
+            <mat-error>No existe ninguna cuenta con ese email, por favor verifiquelo</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+          <input
+            matInput
+            #password name="password"
+            [type]="toggle.type"
+            required
+            [formControl]="passwordFormControl"
+            placeholder="Contraseña"
+          />
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Se <strong>requiere</strong> una contraseña</mat-error>
+          }
+          @if (!passwordFormControl.hasError('required') && passwordFormControl.hasError('passwordIncorrect')) {
+            <mat-error>La contraseña no es correcta, por favor verifiquela</mat-error>
+          }
+        </mat-form-field>
+
+          <button mat-raised-button color="primary">Iniciar sesión</button>
+      </form>
+  </section>
+</section>

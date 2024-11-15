@@ -16,6 +16,15 @@ class LocalStorageManager {
       }
     }
 
+    static loadLastId(key: string) {
+        const lastId = this.getItemObject(key);
+        if(lastId === null) {
+            return 0;
+        } else {
+            return parseInt(lastId[lastId.length - 1].id);
+        }
+    }
+
     static appendItem(key: string, value: object) {
         const currentValue = localStorage.getItem(key);
         if(currentValue === null) {

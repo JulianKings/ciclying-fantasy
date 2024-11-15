@@ -19,6 +19,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { NgIf } from '@angular/common';
 import LocalStorageManager from '../../util/localStorageManager';
 import { Router } from '@angular/router';
+import { UserInterface } from '../../interfaces/user';
 
 export class EmailErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -63,20 +64,24 @@ export class RegisterComponent {
 
     onSubmit(): void {
         if(this.usernameFormControl.valid && this.emailFormControl.valid && this.password.nativeElement && this.password.nativeElement.value !== '' && this.confirmPasswordFormControl.valid) {
-            let userList = LocalStorageManager.getItemObject('userList');
+            let userList: UserInterface[] = LocalStorageManager.getItemObject('userList');
             if(userList === null) {
                 userList = [];
             }
 
-            const user = {
-                username: this.usernameFormControl.value,
-                email: this.emailFormControl.value,
-                password: this.password.nativeElement.value
-            };
+            if(this.usernameFormControl.value !== null && this.emailFormControl.value !== null)
+            {
+              const user: UserInterface = {
+                  id: LocalStorageManager.loadLastId('userList') + 1,
+                  username: this.usernameFormControl.value,
+                  email: this.emailFormControl.value,
+                  password: this.password.nativeElement.value
+              };
 
-            userList.push(user);
-            LocalStorageManager.setItemObject('userList', userList);
-            this.router.navigate(['/login']);
+              userList.push(user);
+              LocalStorageManager.setItemObject('userList', userList);
+              this.router.navigate(['/login']);
+            }
         }
     }
 
@@ -90,7 +95,7 @@ export class RegisterComponent {
                     return null;
                 }
 
-                const user = userList.find((user: any) => user.username === username);
+                const user: UserInterface = userList.find((user: UserInterface) => user.username === username);
                 if(user !== undefined) {
                     return {usernameExists: {value: username}};
                 } else {
@@ -112,7 +117,7 @@ export class RegisterComponent {
                     return null;
                 }
 
-                const user = userList.find((user: any) => user.email === email);
+                const user: UserInterface = userList.find((user: UserInterface) => user.email === email);
                 if(user !== undefined) {
                     return {emailExists: {value: email}};
                 } else {

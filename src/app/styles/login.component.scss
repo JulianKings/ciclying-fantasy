@@ -1,0 +1,59 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+:host .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1.9rem;
+
+  position: relative;
+  z-index: 1;
+  box-shadow: -0.15rem 0 0.75rem rgb(0, 0, 0, 0.3);
+
+  & form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 40rem;
+      gap: 1.5rem;
+
+      & mat-form-field {
+          width: 65%;
+      }
+  }
+
+  & mat-password-strength-info {
+    width: 100%;
+  }
+}
+
+:host ::ng-deep div.mat-mdc-text-field-wrapper {
+  background-color: white !important;
+}
+
+.login_container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 43vw 1fr;
+}
+
+.login__image {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 43vw;
+
+  & img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+  }
+}

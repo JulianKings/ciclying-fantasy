@@ -1,14 +1,9 @@
-import { Component, ElementRef, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
     FormControl,
-    FormGroupDirective,
-    NgForm,
     Validators,
     FormsModule,
     ReactiveFormsModule,
-    AbstractControl,
-    ValidationErrors,
-    ValidatorFn,
 } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
@@ -17,6 +12,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import LocalStorageManager from '../../util/localStorageManager';
 import { Router } from '@angular/router';
+import { UserInterface } from '../../interfaces/user';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/store';
+import { Observable, Subscription } from 'rxjs';
+import { authFeature, AuthState } from '../../store/auth/auth.reducer';
+import { login } from '../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -25,27 +26,45 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: '../../styles/login.component.scss'
 })
-export class LoginComponent {
-  constructor(private router: Router ) {
+export class LoginComponent implements OnInit, OnDestroy {
+  auth: AuthState | null = null;
+  subscription: Subscription = new Subscription();
+  constructor(private router: Router, private store: Store<AppState>) {
+  }
 
+  ngOnInit(): void {
+    this.subscription.add(
+      this.store.select(authFeature.selectAuthState).subscribe((auth) => {
+        this.auth = auth;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onSubmit(): void {
       if(this.passwordFormControl.valid && this.emailFormControl.valid) {
-          let userList = LocalStorageManager.getItemObject('userList');
+          const email: string | null = this.emailFormControl.value, password: string | null = this.passwordFormControl.value;
+          let userList: UserInterface[] = LocalStorageManager.getItemObject('userList');
           if(userList === null) {
-              userList = [];
+              this.emailFormControl.setErrors({'emailNotFound': email});
+              return;
           }
 
-          /*const user = {
-              username: this.usernameFormControl.value,
-              email: this.emailFormControl.value,
-              password: this.password.nativeElement.value
-          };
+          const user: UserInterface | undefined = userList.find((user: UserInterface) => user.email === email);
+          if(user === undefined) {
+              this.emailFormControl.setErrors({'emailNotFound': email});
+              return;
+          }
+          if(user.password !== password) {
+              this.passwordFormControl.setErrors({'passwordIncorrect': password});
+              return;
+          }
 
-          userList.push(user);
-          LocalStorageManager.setItemObject('userList', userList);
-          this.router.navigate(['/login']);*/
+          this.store.dispatch(login({user: user}));
+          this.router.navigate(['/home']);
       }
   }
 

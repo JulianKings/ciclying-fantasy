@@ -1,6 +1,6 @@
 <section class="login_container">
   <section class="login__image">
-    <img src="/assets/cyclism.png" alt="Register">
+    <img src="/assets/cyclism.png" alt="Login">
   </section>
 
   <section class="login">
@@ -13,6 +13,9 @@
                 placeholder="Ej. correo@ejemplo.com">
           @if (emailFormControl.hasError('required')) {
             <mat-error>Se <strong>requiere</strong> un email</mat-error>
+          }
+          @if (!emailFormControl.hasError('required') && emailFormControl.hasError('emailNotFound')) {
+            <mat-error>No existe ninguna cuenta con ese email, por favor verifiquelo</mat-error>
           }
         </mat-form-field>
 
@@ -27,6 +30,12 @@
             [formControl]="passwordFormControl"
             placeholder="Contraseña"
           />
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Se <strong>requiere</strong> una contraseña</mat-error>
+          }
+          @if (!passwordFormControl.hasError('required') && passwordFormControl.hasError('passwordIncorrect')) {
+            <mat-error>La contraseña no es correcta, por favor verifiquela</mat-error>
+          }
         </mat-form-field>
 
           <button mat-raised-button color="primary">Iniciar sesión</button>

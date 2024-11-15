@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NAVIGATION_LINKS } from './constants/navigation';
 import { NgFor } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',

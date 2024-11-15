@@ -92,7 +92,7 @@
             }
         }
 
-        &__login-btn {
+        &__login-btn, &__logout-btn {
             background-color: $blue_two;
             color: white;
             border: none;

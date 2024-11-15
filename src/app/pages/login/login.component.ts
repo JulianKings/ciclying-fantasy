@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               return;
           }
 
-          this.store.dispatch(login({user: user}));
+          this.store.dispatch(login({user: user, token: "defaultToken"}));
           this.router.navigate(['/home']);
       }
   }

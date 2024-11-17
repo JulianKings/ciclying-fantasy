@@ -92,6 +92,21 @@
             }
         }
 
+        &__name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        &__avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: 1px solid $blue;
+            box-shadow: 0 0.18rem 0 $darkblue_transparent;
+        }
+
         &__login-btn, &__logout-btn {
             background-color: $blue_two;
             color: white;

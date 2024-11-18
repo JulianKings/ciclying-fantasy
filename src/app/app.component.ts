@@ -7,11 +7,14 @@ import { loadUser, logout } from './store/auth/auth.actions';
 import { AppState } from './store/store';
 import { authFeature, AuthState } from './store/auth/auth.reducer';
 import { Subscription } from 'rxjs';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { matArrowDropDown, matArrowDropUp } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, NgFor],
+  imports: [RouterOutlet, RouterLink, NgFor, NgIconComponent],
+  viewProviders: [provideIcons({ matArrowDropDown, matArrowDropUp })],
   templateUrl: './app.component.html',
   styleUrl: './styles/app.component.scss'
 })
@@ -39,5 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   title = 'Cycling';
-  navigationLinks = NAVIGATION_LINKS;
+  navigationLinks = NAVIGATION_LINKS.filter(link => !link.userOnly);;
+  userNavigationLinks = NAVIGATION_LINKS.filter(link => link.userOnly);
 }

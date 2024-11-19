@@ -41,6 +41,19 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
+  focusUser(event: Event) {
+    if(event.target instanceof HTMLElement && event.target.getAttribute('data-focus') === 'true') {
+      if(document.activeElement && document.activeElement instanceof HTMLElement)
+      {
+        document.activeElement.blur();
+      }
+      event.target.setAttribute('data-focus', 'false');
+    } else if(event.target instanceof HTMLElement) {
+      event.target.setAttribute('data-focus', 'true');
+      event.target.focus();
+    }
+  }
+
   title = 'Cycling';
   navigationLinks = NAVIGATION_LINKS.filter(link => !link.userOnly);;
   userNavigationLinks = NAVIGATION_LINKS.filter(link => link.userOnly);

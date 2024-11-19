@@ -179,6 +179,13 @@
           transition: transform 0.66s ease-in-out;
         }
 
+        &:hover {
+          & ng-icon {
+            transition: transform 0.33s ease-in-out;
+            transform: rotate(90deg);
+          }
+        }
+
         &:focus {
           & ng-icon {
             transform: rotate(180deg);

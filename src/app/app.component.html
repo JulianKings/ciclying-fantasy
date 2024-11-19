@@ -11,12 +11,12 @@
     </ul>
   </nav>
 
-  <div class="header__user" tabindex="0">
+  <div class="header__user" tabindex="0" (click)="focusUser($event)">
     @if (this.auth && this.auth.isLoggedIn) {
       <div class="header__user__name">
         <img class="header__user__avatar" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBJzmrW-k4O4ITqxUJGRllikMz-1Vfk61W2d-pZADRN5gcj6kU6S7-9DYEWxZMnM2jZTrEPLqe34NWqjETcDE0ZvLEpVNL1XgQHskt5Q" alt="Avatar" />
         <span>{{ this.auth.user?.username }}</span>
-        <ng-icon name="matArrowDropDown"></ng-icon>
+        <ng-icon name="matArrowDropDown" size="1.5rem"></ng-icon>
       </div>
       <button class="header__user__logout-btn" (click)="logout()">Cerrar sesión</button>
       <div class="header__user__navigation">

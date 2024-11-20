@@ -15,8 +15,8 @@ export const NAVIGATION_LINKS = [
         userOnly: false
     },
     {
-        name: 'Calendario',
-        url: '/calendar',
+        name: 'Estadísticas',
+        url: '/stats',
         userOnly: false
     },
     {
